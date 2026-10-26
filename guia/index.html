@@ -256,8 +256,13 @@ TMPDIR=$(mktemp -d /tmp/fv.XXXX) .venv/bin/python $P/job.py          <span class
 
 <section id="exemplos"><div class="wrap">
   <span class="chip">Exemplos</span>
-  <h2>O teste de 40 s, feito com o próprio kit</h2>
-  <p class="sub">Voz local, tema INEMA, 1080p60, −14,3 LUFS. <a href="https://github.com/inematds/video-sem-rosto/releases/tag/v1.0.0" target="_blank" rel="noopener">Baixe o vídeo na release 1.0.0</a>.</p>
+  <h2>Dois vídeos feitos com o kit, em dois looks</h2>
+  <p class="sub">Voz local, tema INEMA, 1080p60, −14,3 LUFS. <a href="https://github.com/inematds/video-sem-rosto/releases/tag/v1.0.1" target="_blank" rel="noopener">Baixe os dois em 1080p60 na release 1.0.1</a>.</p>
+  <div class="ex" style="margin-bottom:22px">
+    <figure><video controls preload="none" playsinline poster="assets/exemplo-reel.jpg" aria-label="Vídeo de exemplo 1" style="width:100%;display:block;aspect-ratio:16/9;background:#000"><source src="assets/exemplo-reel.mp4" type="video/mp4"></video><figcaption>Exemplo 1 · look <strong>reel</strong> (padrão): o próprio kit em ~40 s — papel ↔ preto, render 3D, chips e legenda karaokê.</figcaption></figure>
+    <figure><video controls preload="none" playsinline poster="assets/exemplo-ledger.jpg" aria-label="Vídeo de exemplo 2" style="width:100%;display:block;aspect-ratio:16/9;background:#000"><source src="assets/exemplo-ledger.mp4" type="video/mp4"></video><figcaption>Exemplo 2 · look <strong>ledger</strong>: o yt-pubx em ~35 s — terminal, lista de mudanças, passos numerados e legenda de terminal.</figcaption></figure>
+  </div>
+  <p class="sub" style="margin:0 0 14px">Abaixo: a folha de contato e um quadro do exemplo 1.</p>
   <div class="ex">
     <figure><img src="assets/ex1.jpg" alt="Folha com 16 quadros do vídeo de teste" loading="lazy"><figcaption>Folha de contato gerada pelo <code>qc.py</code>: papel ↔ preto, cartão amarelo, print real, legenda karaokê.</figcaption></figure>
     <figure><img src="assets/ex2.jpg" alt="Quadro do vídeo de teste com chips Título, Print real, Imagem 3D e Legenda" loading="lazy"><figcaption>Cena "Cada frase, uma cena": cada etiqueta entra no tempo da palavra falada.</figcaption></figure>

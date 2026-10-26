@@ -10,7 +10,16 @@ O video-sem-rosto é um kit (uma "skill") que ensina o Claude Code a fazer víde
 
 ## 📖 Guia de uso
 
-Guia completo (landing + passo a passo): **https://inematds.github.io/video-sem-rosto/guia/** · Vídeo de teste: [release 1.0.0](https://github.com/inematds/video-sem-rosto/releases/tag/v1.0.0)
+Guia completo (landing + passo a passo): **https://inematds.github.io/video-sem-rosto/guia/** · Vídeo de teste: [release 1.0.1](https://github.com/inematds/video-sem-rosto/releases/tag/v1.0.1)
+
+
+## 🎬 Exemplos
+
+| Exemplo 1 — look reel: o próprio kit (~40 s) | Exemplo 2 — look ledger: yt-pubx (~35 s) |
+|---|---|
+| [![Exemplo 1 — look reel: o próprio kit (~40 s)](guia/assets/exemplo-reel.jpg)](https://inematds.github.io/video-sem-rosto/guia/assets/exemplo-reel.mp4) | [![Exemplo 2 — look ledger: yt-pubx (~35 s)](guia/assets/exemplo-ledger.jpg)](https://inematds.github.io/video-sem-rosto/guia/assets/exemplo-ledger.mp4) |
+
+Clique na imagem para abrir o vídeo. Em 1080p60: [release 1.0.1](https://github.com/inematds/video-sem-rosto/releases/tag/v1.0.1). Os dois saem de `templates/exemplo_30s.py` e `templates/exemplo_ledger.py`.
 
 ---
 
@@ -207,4 +216,4 @@ assets/proof/               prints opcionais para a chamada (página do inema.cl
 Cada vídeo fica em `~/projetos/output/video-sem-rosto/<data>-<slug>/` com `script.txt`, `vo.mp3`, `words.json`, `img/`, `cap/`, `clips/`, `job.py` e `out/`.
 
 ## Versão
-`1.0.0` — 25/10/2026. Histórico em `CHANGELOG.md`.
+`1.0.1` — 26/10/2026. Histórico em `CHANGELOG.md`.

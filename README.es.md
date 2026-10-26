@@ -8,7 +8,16 @@ video-sem-rosto es un kit (una "skill") que enseña a Claude Code a hacer videos
 
 ## 📖 Guía de uso
 
-Guía completa (landing + paso a paso): **https://inematds.github.io/video-sem-rosto/guia/es/** · Video de prueba: [release 1.0.0](https://github.com/inematds/video-sem-rosto/releases/tag/v1.0.0)
+Guía completa (landing + paso a paso): **https://inematds.github.io/video-sem-rosto/guia/es/** · Video de prueba: [release 1.0.1](https://github.com/inematds/video-sem-rosto/releases/tag/v1.0.1)
+
+
+## 🎬 Ejemplos
+
+| Ejemplo 1 — look reel: el propio kit (~40 s) | Ejemplo 2 — look ledger: yt-pubx (~35 s) |
+|---|---|
+| [![Ejemplo 1 — look reel: el propio kit (~40 s)](guia/assets/exemplo-reel.jpg)](https://inematds.github.io/video-sem-rosto/guia/assets/exemplo-reel.mp4) | [![Ejemplo 2 — look ledger: yt-pubx (~35 s)](guia/assets/exemplo-ledger.jpg)](https://inematds.github.io/video-sem-rosto/guia/assets/exemplo-ledger.mp4) |
+
+Haz clic en la imagen para abrir el video (narración en portugués). En 1080p60: [release 1.0.1](https://github.com/inematds/video-sem-rosto/releases/tag/v1.0.1). Los dos salen de `templates/exemplo_30s.py` y `templates/exemplo_ledger.py`.
 
 ---
 
@@ -205,4 +214,4 @@ assets/proof/               capturas opcionales para la llamada (página de inem
 Cada video queda en `~/projetos/output/video-sem-rosto/<fecha>-<slug>/` con `script.txt`, `vo.mp3`, `words.json`, `img/`, `cap/`, `clips/`, `job.py` y `out/`.
 
 ## Versión
-`1.0.0` — 25/10/2026. Historial en `CHANGELOG.md`.
+`1.0.1` — 26/10/2026. Historial en `CHANGELOG.md`.

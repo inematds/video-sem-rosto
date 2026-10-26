@@ -256,8 +256,13 @@ TMPDIR=$(mktemp -d /tmp/fv.XXXX) .venv/bin/python $P/job.py          <span class
 
 <section id="exemplos"><div class="wrap">
   <span class="chip">Ejemplos</span>
-  <h2>La prueba de 40 s, hecha con el propio kit</h2>
-  <p class="sub">Voz local, tema INEMA, 1080p60, −14,3 LUFS. <a href="https://github.com/inematds/video-sem-rosto/releases/tag/v1.0.0" target="_blank" rel="noopener">Descarga el video en la release 1.0.0</a>.</p>
+  <h2>Dos videos hechos con el kit, en dos looks</h2>
+  <p class="sub">Voz local, tema INEMA, 1080p60, −14,3 LUFS. <a href="https://github.com/inematds/video-sem-rosto/releases/tag/v1.0.1" target="_blank" rel="noopener">Descarga los dos en 1080p60 en la release 1.0.1</a>.</p>
+  <div class="ex" style="margin-bottom:22px">
+    <figure><video controls preload="none" playsinline poster="../assets/exemplo-reel.jpg" aria-label="Video de ejemplo 1" style="width:100%;display:block;aspect-ratio:16/9;background:#000"><source src="../assets/exemplo-reel.mp4" type="video/mp4"></video><figcaption>Ejemplo 1 · look <strong>reel</strong> (por defecto): el propio kit en ~40 s — papel ↔ negro, render 3D, chips y subtítulos karaoke (narración en portugués).</figcaption></figure>
+    <figure><video controls preload="none" playsinline poster="../assets/exemplo-ledger.jpg" aria-label="Video de ejemplo 2" style="width:100%;display:block;aspect-ratio:16/9;background:#000"><source src="../assets/exemplo-ledger.mp4" type="video/mp4"></video><figcaption>Ejemplo 2 · look <strong>ledger</strong>: yt-pubx en ~35 s — terminal, lista de cambios, pasos numerados y subtítulos estilo terminal (narración en portugués).</figcaption></figure>
+  </div>
+  <p class="sub" style="margin:0 0 14px">Abajo: la hoja de contactos y un cuadro del ejemplo 1.</p>
   <div class="ex">
     <figure><img src="../assets/ex1.jpg" alt="Hoja con 16 cuadros del video de prueba" loading="lazy"><figcaption>Hoja de contacto generada por el <code>qc.py</code>: papel ↔ negro, tarjeta amarilla, captura real, subtítulos karaoke.</figcaption></figure>
     <figure><img src="../assets/ex2.jpg" alt="Cuadro del video de prueba con chips Título, Captura real, Imagen 3D y Subtítulo" loading="lazy"><figcaption>Escena "Cada frase, una escena": cada etiqueta entra en el tiempo de la palabra hablada.</figcaption></figure>

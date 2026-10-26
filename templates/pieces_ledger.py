@@ -4,7 +4,6 @@ Palette: NAVY #0d1330, PAPER #f3efe6, LIME #d4ff3a, MERGE purple #8250df. Fonts:
 from fv import *
 from fv import _uid, _wordlist, _h
 import html as _hm
-__all__ = [n for n in dir() if not n.startswith('__')] + ['_h', '_uid']
 
 NAVY, PAPER, LIME, MERGE = "#0d1330", "#f3efe6", "#d4ff3a", "#8250df"
 SG, MONO = "Space Grotesk", "IBM Plex Mono"
@@ -200,3 +199,6 @@ def term(lines, at, x, y, w=980, step_s=0.5, title="zsh"):
             f"box-shadow:0 30px 80px rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.1)'><div style='height:44px;background:#121a3d;display:flex;align-items:center;gap:9px;padding:0 18px'>"
             + "".join(f"<i style='width:12px;height:12px;border-radius:50%;background:{c}'></i>" for c in ("#ff5f57", "#febc2e", "#28c840"))
             + f"<span style='margin-left:14px;font:700 17px {MONO};color:#8f97b8'>{_h.escape(title)}</span></div><div style='padding:26px 32px'>{''.join(rows)}</div></div>")
+
+
+__all__ = [n for n in dir() if not n.startswith('__')] + ['_h', '_uid']

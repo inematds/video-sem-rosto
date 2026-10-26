@@ -1,0 +1,11 @@
+O yt-pubx é um programa que publica qualquer vídeo no YouTube com um comando.
+
+Você aponta o arquivo ou o link, e escreve uma frase de contexto.
+
+O Codex escreve o título, a descrição e as tags, e cria a arte da thumb.
+
+Depois ele publica no canal que você escolher: público, não listado, privado ou agendado.
+
+Tudo roda na sua máquina, pela assinatura, sem chave de API de modelo.
+
+O yt-pubx é aberto, e o passo a passo está no inema.club.

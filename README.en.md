@@ -8,7 +8,16 @@ video-sem-rosto is a kit (a "skill") that teaches Claude Code to make horizontal
 
 ## 📖 User guide
 
-Full guide (landing page + step by step): **https://inematds.github.io/video-sem-rosto/guia/en/** · Test video: [release 1.0.0](https://github.com/inematds/video-sem-rosto/releases/tag/v1.0.0)
+Full guide (landing page + step by step): **https://inematds.github.io/video-sem-rosto/guia/en/** · Test video: [release 1.0.1](https://github.com/inematds/video-sem-rosto/releases/tag/v1.0.1)
+
+
+## 🎬 Examples
+
+| Example 1 — reel look: the kit itself (~40 s) | Example 2 — ledger look: yt-pubx (~35 s) |
+|---|---|
+| [![Example 1 — reel look: the kit itself (~40 s)](guia/assets/exemplo-reel.jpg)](https://inematds.github.io/video-sem-rosto/guia/assets/exemplo-reel.mp4) | [![Example 2 — ledger look: yt-pubx (~35 s)](guia/assets/exemplo-ledger.jpg)](https://inematds.github.io/video-sem-rosto/guia/assets/exemplo-ledger.mp4) |
+
+Click the image to open the video (narration in Portuguese). In 1080p60: [release 1.0.1](https://github.com/inematds/video-sem-rosto/releases/tag/v1.0.1). Both come from `templates/exemplo_30s.py` and `templates/exemplo_ledger.py`.
 
 ---
 
@@ -205,4 +214,4 @@ assets/proof/               optional screenshots for the call to action (inema.c
 Each video lives in `~/projetos/output/video-sem-rosto/<date>-<slug>/` with `script.txt`, `vo.mp3`, `words.json`, `img/`, `cap/`, `clips/`, `job.py` and `out/`.
 
 ## Version
-`1.0.0` — 10/25/2026. History in `CHANGELOG.md`.
+`1.0.1` — 10/26/2026. History in `CHANGELOG.md`.
