@@ -7,7 +7,7 @@ Como funciona:
   3. Whisper large-v3 local ouve cada frase, mede a semelhança com o texto e dá o tempo de cada palavra.
      Frase abaixo de FV_MIN_SIM (0,80) é gerada de novo (até 2 vezes); se continuar ruim, para com erro.
   4. Junta tudo com pausas (0,28 s entre frases, 0,55 s entre batidas) e grava vo.mp3 + words.json.
-Variáveis: FV_VOICE (nei|nei2|nei3|nei4|caminho.wav) · FV_LANG (pt) · FV_ATEMPO (1.0; máx. 1.15) ·
+Variáveis: FV_VOICE (nome em FV_VOICE_DIR ou caminho.wav) · FV_VOICE_DIR · FV_LANG (pt) · FV_ATEMPO (1.0; máx. 1.15) ·
            FV_CFG / FV_EXAG (0.6/0.6) · CHATTERBOX_PYTHON · INEMAVOX_DIR."""
 import sys, os, json, re, subprocess, tempfile, shutil
 
@@ -15,7 +15,7 @@ HOME = os.path.expanduser("~")
 VOX = os.environ.get("INEMAVOX_DIR", os.path.join(HOME, "projetos/inemavox"))
 CB_PY = os.environ.get("CHATTERBOX_PYTHON", os.path.join(HOME, "miniconda3/envs/chatterbox/bin/python3"))
 VOX_PY = os.path.join(VOX, "venv/bin/python")
-REFS = os.path.join(HOME, "projetos/timesmkt3/media/voice-refs")
+REFS = os.environ.get("FV_VOICE_DIR", os.path.join(HOME, "projetos/timesmkt3/media/voice-refs"))
 VOICE = os.environ.get("FV_VOICE", "nei")
 REF = VOICE if VOICE.endswith(".wav") else os.path.join(REFS, VOICE + ".wav")
 LANG = os.environ.get("FV_LANG", "pt")
@@ -23,7 +23,9 @@ ATEMPO = min(1.15, float(os.environ.get("FV_ATEMPO", "1.0")))
 MIN_SIM = float(os.environ.get("FV_MIN_SIM", "0.80"))
 HERE = os.path.dirname(os.path.abspath(__file__))
 for need in (CB_PY, VOX_PY, REF):
-    if not os.path.exists(need): raise SystemExit(f"Falta: {need} (ver README › Instalação)")
+    if not os.path.exists(need):
+        dica = " — defina FV_VOICE=/caminho/sua-voz.wav" if need == REF else " (ver README › Instalação)"
+        raise SystemExit(f"Falta: {need}{dica}")
 
 job = os.path.abspath(sys.argv[1])
 beats = [re.sub(r"\s+", " ", p).strip() for p in open(os.path.join(job, "script.txt")).read().split("\n\n") if p.strip()]

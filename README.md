@@ -1,5 +1,19 @@
 # video-sem-rosto
 
+[![video-sem-rosto](guia/assets/banner.jpg)](https://inematds.github.io/video-sem-rosto/guia/)
+
+**🇧🇷 [Português](README.md) · 🇺🇸 [English](README.en.md) · 🇪🇸 [Español](README.es.md)**
+
+## O que é
+
+O video-sem-rosto é um kit (uma "skill") que ensina o Claude Code a fazer vídeos explicativos na horizontal sem gravar nada: sem câmera, sem avatar. Serve para quem quer explicar uma ferramenta, um repositório ou uma novidade em vídeo sem aparecer e sem pagar serviço de voz. A voz é gerada no seu computador com uma voz clonada, e as cenas mostram a página real do site, imagens 3D e legenda sincronizada. Para usar, você precisa do Claude Code, ffmpeg, Python e do inemavox (que faz a voz e a transcrição) rodando na máquina.
+
+## 📖 Guia de uso
+
+Guia completo (landing + passo a passo): **https://inematds.github.io/video-sem-rosto/guia/** · Vídeo de teste: [release 1.0.0](https://github.com/inematds/video-sem-rosto/releases/tag/v1.0.0)
+
+---
+
 **Vídeo explicativo 16:9 sem câmera e sem avatar, feito pelo Claude Code a partir de um link ou assunto.**
 O agente pesquisa a fonte oficial, escreve o roteiro, você aprova, a voz é gerada **na sua máquina** e cada frase vira uma cena de motion design — título, print real do site, imagem 3D e legenda palavra por palavra — em 1080p a 60 quadros.
 
@@ -40,15 +54,17 @@ Quem faz: 🧠 sessão com o Nei · ⚙️ script · 🤖 agente (Claude Code se
 
 ## Instalação (uma vez, ~5 min)
 
-Pré-requisitos nesta máquina (já existem no spark-922b):
+Pré-requisitos (o `setup.sh` confere e diz o que falta):
 
-| O quê | Onde | Para quê |
+| O quê | Para quê | Como instalar |
 |---|---|---|
-| Python 3 + ffmpeg | sistema | motor e encode |
-| inemavox | `~/projetos/inemavox` (worker `chatterbox_tts_worker.py` + `venv` com `faster-whisper`) | voz e tempo por palavra |
-| Conda `chatterbox` | `~/miniconda3/envs/chatterbox` | modelo de voz (GPU) |
-| Voz clonada | `~/projetos/timesmkt3/media/voice-refs/nei.wav` (`nei2`…`nei4`) | voz do Nei |
-| Codex CLI logado | `codex` no PATH | imagens 3D pela assinatura (opcional) |
+| Python 3 + ffmpeg | motor e encode | `sudo apt install python3-venv ffmpeg` |
+| [inemavox](https://github.com/inematds/inemavox) | worker do Chatterbox + `venv` com faster-whisper (tempo por palavra) | `git clone https://github.com/inematds/inemavox ~/projetos/inemavox && cd ~/projetos/inemavox && python3 -m venv venv && venv/bin/pip install faster-whisper soundfile numpy` |
+| Chatterbox (conda `chatterbox`) | modelo aberto que clona a voz de um áudio curto (GPU recomendada) | `conda create -n chatterbox python=3.11 -y && ~/miniconda3/envs/chatterbox/bin/pip install chatterbox-tts soundfile` |
+| Voz de referência | a voz que narra: 10 s de fala limpa, `.wav` 24 kHz mono | `ffmpeg -i gravacao.m4a -ss 2 -t 10 -ac 1 -ar 24000 ~/minha-voz.wav && export FV_VOICE=~/minha-voz.wav` |
+| Codex CLI logado (opcional) | imagens 3D pela assinatura do ChatGPT | `codex login` — sem ele, use só prints/logos ou `FV_IMG=flux` se tiver um servidor flux2-klein local |
+
+Caminhos diferentes? `INEMAVOX_DIR`, `CHATTERBOX_PYTHON`, `FV_VOICE` (nome em `FV_VOICE_DIR` ou caminho `.wav`). No INEMA, `FV_VOICE=nei` usa a voz já gravada em `~/projetos/timesmkt3/media/voice-refs/`.
 
 ```bash
 git clone https://github.com/inematds/video-sem-rosto ~/projetos/video-sem-rosto
@@ -56,6 +72,8 @@ cd ~/projetos/video-sem-rosto
 bash setup.sh          # cria .venv, instala Playwright+Chromium, confere voz/Whisper, liga a skill
                        # tem que terminar com: SELFTEST PASS
 ```
+
+Deixe a voz fixa no shell (`echo 'export FV_VOICE=~/minha-voz.wav' >> ~/.bashrc`) e edite o `PROFILE.md`: ele vem com o perfil do INEMA (chamada para o inema.club, publicação pelo yt-pubx, avisos no bot) — troque nome, chamada, canal e regras pelos seus. Na 1ª execução o Whisper large-v3 (~3 GB) e o Chatterbox baixam os pesos. Se o Playwright pedir bibliotecas do sistema: `sudo .venv/bin/python -m playwright install-deps chromium`.
 
 O `setup.sh` cria o link `~/.claude/skills/video-sem-rosto → este repo`. A partir daí, no Claude Code:
 
@@ -77,7 +95,7 @@ TMPDIR=$(mktemp -d /tmp/fv.XXXX) .venv/bin/python $J/job.py          # render
 python3 scripts/qc.py $J/out/video-sem-rosto-teste.mp4
 ```
 
-Os tempos das cenas no exemplo são os da voz gerada aqui; com outra voz, ajuste os `v.scene(início, fim, …)` lendo o `words.json`.
+O exemplo espera `img/d_clap.png`, `img/d_monitor.png` e `cap/gh.png` (os comandos acima geram com esses nomes). Os tempos das cenas são os da voz gerada aqui; com outra voz, ajuste os `v.scene(início, fim, …)` lendo o `words.json`.
 
 ---
 

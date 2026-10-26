@@ -16,9 +16,10 @@ command -v codex   >/dev/null || echo "aviso: Codex CLI ausente — sem renders 
 # 2. voz e Whisper locais (inemavox)
 VOX="${INEMAVOX_DIR:-$HOME/projetos/inemavox}"
 CB="${CHATTERBOX_PYTHON:-$HOME/miniconda3/envs/chatterbox/bin/python3}"
-REF="$HOME/projetos/timesmkt3/media/voice-refs/${FV_VOICE:-nei}.wav"
+VOICE="${FV_VOICE:-nei}"
+case "$VOICE" in *.wav) REF="$VOICE" ;; *) REF="${FV_VOICE_DIR:-$HOME/projetos/timesmkt3/media/voice-refs}/$VOICE.wav" ;; esac
 for f in "$VOX/chatterbox_tts_worker.py" "$VOX/venv/bin/python" "$CB" "$REF"; do
-  [ -e "$f" ] || { echo "Falta: $f (ver README › Instalação)"; exit 1; }
+  [ -e "$f" ] || { echo "Falta: $f (ver README › Instalação; voz própria: export FV_VOICE=/caminho/voz.wav)"; exit 1; }
 done
 "$VOX/venv/bin/python" -c "import faster_whisper, soundfile" || { echo "faster-whisper ausente no venv do inemavox"; exit 1; }
 

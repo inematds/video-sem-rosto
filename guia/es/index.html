@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>video-sem-rosto — video explicativo sin cámara y sin avatar</title>
+<meta name="description" content="Kit para que Claude Code haga video explicativo 16:9 sin cámara y sin avatar: investigación, guion aprobado, voz local, capturas reales y motion design en 1080p60.">
+<link rel="alternate" hreflang="pt-BR" href="https://inematds.github.io/video-sem-rosto/guia/">
+<link rel="alternate" hreflang="en" href="https://inematds.github.io/video-sem-rosto/guia/en/">
+<link rel="alternate" hreflang="es" href="https://inematds.github.io/video-sem-rosto/guia/es/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c0c10; --bg2:#14141b; --card:#16161e; --line:#272730;
+    --txt:#e9e9ee; --mut:#9a9aa6; --amb:#E2A23B; --amb2:#f0c070; --sky:#38bdf8; --pro:#cbd5e1;
+    color-scheme:dark;
+  }
+  body.light{
+    --bg:#f6f7f9; --bg2:#eceef2; --card:#ffffff; --line:#e1e3ea;
+    --txt:#1a1a22; --mut:#5b5b68; --amb:#b9791d; --amb2:#a16207; --sky:#0369a1; --pro:#b45309;
+    color-scheme:light;
+  }
+  body.light .hero .glow{opacity:.5}
+  body.light pre{background:#0e0e14;color:#d6d6e0}
+  body.light pre .c{color:#8a8a98}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:Sora,sans-serif;line-height:1.15;margin:0}
+  a{color:var(--amb);text-decoration:none}
+  code,pre{font-family:"JetBrains Mono",monospace}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+  .mut{color:var(--mut)} .amb{color:var(--amb)}
+  .chip{display:inline-block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amb);font-weight:600;font-family:Sora}
+  nav{position:sticky;top:0;z-index:30;backdrop-filter:blur(12px);background:rgba(12,12,16,.78);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;gap:22px;height:60px}
+  nav .brand{display:flex;align-items:center;gap:8px;font-family:Sora;font-weight:800;letter-spacing:-.02em;color:var(--amb)}
+  nav .brand .emoji{font-size:1.25rem}
+  nav .sep{color:var(--mut);opacity:.45}
+  nav .inema{color:var(--sky);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .inema:hover{filter:brightness(1.15)}
+  nav .pro{color:var(--pro);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .pro:hover{filter:brightness(1.15)}
+  nav .clubpro{display:inline-flex;align-items:center;gap:6px}
+  nav .links{margin-left:auto;display:flex;align-items:center;gap:20px;font-size:.92rem}
+  nav .links a.sec{color:var(--mut)} nav .links a.sec:hover{color:var(--txt)}
+  .lang{display:inline-flex;gap:2px;font-family:Sora;font-size:.78rem}
+  .lang a{color:var(--mut);padding:.2em .45em;border-radius:6px} .lang a.on{color:var(--amb);background:rgba(226,162,59,.12)}
+  .tgl{background:var(--bg2);border:1px solid var(--line);color:var(--txt);width:38px;height:38px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:1.05rem}
+  .tgl:hover{border-color:var(--amb)}
+  .btn{display:inline-block;background:var(--amb);color:#1a1206;font-weight:600;padding:.6em 1.05em;border-radius:10px;font-family:Sora}
+  .btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
+  @media(max-width:760px){nav .links a.sec{display:none}}
+  @media(max-width:520px){nav .wrap{gap:8px;padding:8px 14px;height:auto;flex-wrap:wrap} nav .links{gap:8px;margin-left:0;width:100%;justify-content:space-between} nav .btn{padding:.45em .7em;font-size:.82rem} .tgl{width:34px;height:34px}}
+  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+  .hero .glow{position:absolute;inset:-40% -20% auto auto;width:70%;height:600px;background:radial-gradient(closest-side,rgba(226,162,59,.22),transparent 70%);pointer-events:none}
+  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:74px 22px}
+  .hero h1{font-size:clamp(2.2rem,5vw,3.5rem);font-weight:800;letter-spacing:-.025em}
+  .hero p.lead{font-size:1.18rem;color:var(--mut);margin:1.1em 0 1.6em;max-width:34ch}
+  .hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+  .hero figure{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000}
+  .hero figure img{width:100%;height:auto;display:block}
+  .resumo{padding:38px 0 34px;border-bottom:1px solid var(--line)}
+  .resumo p{font-size:1.12rem;line-height:1.7;max-width:74ch;margin:.55em 0 0}
+  @media(max-width:780px){.hero .wrap{grid-template-columns:1fr;padding:48px 22px}}
+  section{padding:62px 0;border-bottom:1px solid var(--line)}
+  section h2{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:800;letter-spacing:-.02em}
+  section .sub{color:var(--mut);margin:.6em 0 2em;max-width:62ch}
+  .grid{display:grid;gap:16px}
+  .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)} .g2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:820px){.g3,.g4{grid-template-columns:1fr 1fr}}
+  @media(max-width:540px){.g2,.g3,.g4{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .card h3{font-size:1.05rem;margin-bottom:.4em}
+  .card p{color:var(--mut);font-size:.92rem;margin:0}
+  .num{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;border-radius:8px;background:rgba(226,162,59,.14);color:var(--amb);font-family:Sora;font-weight:800;font-size:.9rem;margin-bottom:.7em}
+  .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+  .flow span{background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:.45em .9em;font-size:.85rem;font-family:Sora;font-weight:600}
+  .flow .arr{color:var(--amb);border:none;background:none;padding:0 .1em}
+  pre{background:#0a0a0e;border:1px solid var(--line);border-radius:12px;padding:16px 18px;overflow:auto;font-size:.86rem;line-height:1.6;color:#d6d6e0}
+  pre .c{color:#6f6f7c} pre .k{color:var(--amb2)} pre .s{color:#9ece6a}
+  .step{display:grid;grid-template-columns:46px minmax(0,1fr);gap:16px;margin-bottom:26px}
+  .step>div,.card{min-width:0}
+  p code,li code,td code{overflow-wrap:anywhere}
+  .step .b{width:46px;height:46px;border-radius:12px;background:var(--amb);color:#1a1206;font-family:Sora;font-weight:800;font-size:1.25rem;display:flex;align-items:center;justify-content:center}
+  .step h3{font-size:1.12rem;margin-bottom:.3em}
+  .step p{color:var(--mut);margin:.2em 0 .7em}
+  .ex{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:680px){.ex{grid-template-columns:1fr}}
+  .ex figure{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+  .ex figure img{width:100%;height:auto;display:block}
+  .ex figcaption{padding:12px 14px;font-size:.88rem;color:var(--mut);background:var(--card)}
+  .phase{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .phase:last-child{border:none}
+  .phase .tag{flex:0 0 92px;font-family:Sora;font-weight:800;color:var(--amb)}
+  .phase .d strong{display:block;margin-bottom:.2em}
+  .phase .d span{color:var(--mut);font-size:.92rem}
+  footer{padding:46px 0;text-align:center;color:var(--mut);font-size:.9rem}
+  .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:.3em .8em;font-size:.78rem;color:var(--mut);margin:0 4px}
+</style>
+</head>
+<body>
+
+
+<nav><div class="wrap">
+  <a class="brand" href="#top"><span class="emoji">🎬</span> video-sem-rosto</a>
+  <span class="sep">|</span>
+  <span class="clubpro">
+    <a class="inema" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a>
+    <span class="sep">-</span>
+    <a class="pro" href="https://inema.pro" target="_blank" rel="noopener">PRO</a>
+  </span>
+  <div class="links">
+    <a class="sec" href="#oque">Qué es</a>
+    <a class="sec" href="#fluxo">Cómo funciona</a>
+    <a class="sec" href="#guia">Guía de uso</a>
+    <a class="sec" href="#exemplos">Ejemplos</a>
+    <a class="sec" href="#roadmap">Roadmap</a>
+    <span class="lang"><a href="../">PT</a><a href="../en/">EN</a><a class="on" href="./">ES</a></span>
+    <button class="tgl" id="themeToggle" aria-label="Alternar tema" title="Alternar tema">🌙</button>
+    <a class="btn" href="https://github.com/inematds/video-sem-rosto" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</div></nav>
+
+<header class="hero" id="top">
+  <div class="glow"></div>
+  <div class="wrap">
+    <div>
+      <span class="chip">Kit para Claude Code · voz local · sin API de pago</span>
+      <h1>Video explicativo <span class="amb">sin rostro</span>, del enlace al 1080p</h1>
+      <p class="lead">Tú pasas el enlace de una herramienta. El agente investiga, escribe el guion, tú lo apruebas, y cada frase se convierte en una escena con captura real, imagen 3D y subtítulos palabra por palabra.</p>
+      <div class="cta">
+        <a class="btn" href="#guia">Empezar la guía</a>
+        <a class="btn ghost" href="https://github.com/inematds/video-sem-rosto" target="_blank" rel="noopener">Ver en GitHub</a>
+      </div>
+    </div>
+    <figure><img src="../assets/banner-es.jpg" alt="Banner de video-sem-rosto: video explicativo sin cámara y sin avatar"></figure>
+  </div>
+</header>
+
+<section id="resumo" class="resumo"><div class="wrap">
+  <span class="chip">En resumen</span>
+  <p>video-sem-rosto es un kit (una "skill") que enseña a Claude Code a hacer videos explicativos en horizontal sin grabar nada: sin cámara, sin avatar. Sirve para quien quiere explicar una herramienta, un repositorio o una novedad en video sin aparecer y sin pagar un servicio de voz. La voz se genera en tu computadora con una voz clonada, y las escenas muestran la página real del sitio, imágenes 3D y subtítulos sincronizados. Para usarlo, necesitas Claude Code, ffmpeg, Python e inemavox (que hace la voz y la transcripción) funcionando en tu máquina.</p>
+</div></section>
+
+<section id="oque"><div class="wrap">
+  <span class="chip">Qué es</span>
+  <h2>Un estudio de motion design que el agente opera</h2>
+  <p class="sub">Cada escena es una página HTML animada en el tiempo exacto del habla. Chromium avanza cuadro a cuadro y ffmpeg monta el video.</p>
+  <figure style="margin:0 0 26px;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000"><img src="../assets/banner-grade-es.jpg" alt="Las etapas del kit: investigación, guion aprobado, voz local, capturas reales, render 1080p60 y QC" loading="lazy" style="width:100%;display:block"></figure>
+  <div class="grid g3">
+    <div class="card"><h3>🎙️ Voz local, verificada</h3><p>Chatterbox genera cada frase con la voz clonada; Whisper local la escucha, la compara con el guion y manda generar de nuevo la frase que salió mal. Ninguna API de pago.</p></div>
+    <div class="card"><h3>🖼️ Captura real con zoom</h3><p>El <code>capture.py</code> abre la página, encuentra el texto que cita la voz y devuelve su posición, para que el zoom y el anillo caigan exactamente ahí.</p></div>
+    <div class="card"><h3>✅ Puertas de calidad</h3><p>No se genera nada antes de que el guion esté aprobado. Al final, el <code>qc.py</code> verifica 1920x1080, 60 fps, bitrate, −14 LUFS y cuadros negros, y arma una hoja para revisar.</p></div>
+  </div>
+</div></section>
+
+<section id="fluxo"><div class="wrap">
+  <span class="chip">Cómo funciona</span>
+  <h2>Del enlace al video, en 8 etapas</h2>
+  <p class="sub">Voz, imágenes y capturas corren en paralelo. Las escenas se escriben leyendo el tiempo de cada palabra en el <code>words.json</code>.</p>
+  <div class="flow">
+    <span>Investigación de la fuente oficial</span><span class="arr">→</span>
+    <span>Guion</span><span class="arr">→</span>
+    <span>Tú apruebas</span><span class="arr">→</span>
+    <span>Voz + tiempo por palabra</span><span class="arr">→</span>
+    <span>Imágenes 3D y capturas</span><span class="arr">→</span>
+    <span>Escenas (job.py)</span><span class="arr">→</span>
+    <span>Render 1080p60</span><span class="arr">→</span>
+    <span>QC</span>
+  </div>
+  <div class="grid g3" style="margin-top:26px">
+    <div class="card"><h3>3 looks</h3><p><strong>reel</strong> (papel ↔ negro, chips, 3D), <strong>cinema</strong> (imagen real primero, letterbox) y <strong>ledger</strong> (notas de versión, contadores). Alterna entre videos.</p></div>
+    <div class="card"><h3>Tema INEMA</h3><p>Negro <code>#0c0c10</code>, papel claro, amarillo <code>#FACC15</code>, títulos en Sora y cuerpo en Inter, aplicados en los tres looks. <code>FV_THEME=original</code> vuelve a la paleta crema/naranja.</p></div>
+    <div class="card"><h3>Sonido limpio</h3><p>Solo la voz, a −14 LUFS, y una pista opcional baja. Sin whoosh en los cortes (<code>FV_WHOOSH=1</code> lo activa, si quieres).</p></div>
+  </div>
+</div></section>
+
+<section id="pre"><div class="wrap">
+  <span class="chip">Requisitos previos</span>
+  <h2>Lo que debe estar en la máquina</h2>
+  <p class="sub">El <code>setup.sh</code> verifica todo y se detiene con el mensaje de lo que falta.</p>
+  <div class="grid g3">
+    <div class="card"><h3>Python 3 + ffmpeg</h3><p>Motor de las escenas y codificación del video.</p><pre><span class="c"># Ubuntu</span>
+<span class="k">sudo apt install</span> python3-venv ffmpeg</pre></div>
+    <div class="card"><h3>inemavox (voz y transcripción)</h3><p>Proyecto abierto de INEMA que trae el worker de Chatterbox y un <code>venv</code> con faster-whisper. El kit usa ambos por ruta (<code>INEMAVOX_DIR</code> cambia la ubicación).</p><pre><span class="k">git clone</span> <span class="s">https://github.com/inematds/inemavox</span> ~/projetos/inemavox
+<span class="k">cd</span> ~/projetos/inemavox && <span class="k">python3 -m venv</span> venv
+venv/bin/pip install faster-whisper soundfile numpy</pre></div>
+    <div class="card"><h3>Chatterbox (genera la voz)</h3><p>Modelo abierto de voz que clona la voz a partir de un audio corto. Corre en un entorno conda propio (<code>CHATTERBOX_PYTHON</code> cambia la ruta).</p><pre><span class="c"># Miniconda (si no lo tienes): https://docs.anaconda.com/miniconda/ — se instala en ~/miniconda3</span>
+<span class="c"># otro lugar: export CHATTERBOX_PYTHON=.../envs/chatterbox/bin/python3</span>
+<span class="k">conda create</span> -n chatterbox python=3.11 -y
+~/miniconda3/envs/chatterbox/bin/pip install chatterbox-tts soundfile</pre></div>
+    <div class="card"><h3>Tu voz de referencia</h3><p>10 segundos de habla limpia, sin música, en <code>.wav</code> 24 kHz mono. Grábala con el celular y conviértela:</p><pre><span class="k">ffmpeg</span> -i gravacao.m4a -ss 2 -t 10 -ac 1 -ar 24000 <span class="s">~/minha-voz.wav</span>
+<span class="k">echo</span> <span class="s">'export FV_VOICE=~/minha-voz.wav'</span> >> ~/.bashrc && <span class="k">source</span> ~/.bashrc</pre></div>
+    <div class="card"><h3>Claude Code</h3><p>Es quien sigue el <code>SKILL.md</code>: investiga, escribe el guion y las escenas, ejecuta los scripts.</p><pre><span class="k">claude</span></pre></div>
+    <div class="card"><h3>Codex CLI (opcional)</h3><p>Genera las imágenes 3D con la suscripción de ChatGPT (sin API): <code>npm i -g @openai/codex</code> y <code>codex login</code>. Sin él: <code>FV_IMG=flux</code> si tienes un servidor flux2-klein local, o haz el video solo con capturas, logos e íconos.</p><pre><span class="k">codex</span> login</pre></div>
+    <div class="card"><h3>GPU (recomendado)</h3><p>La voz y Whisper corren bastante más rápido en GPU; ambos pasan a CPU si es necesario.</p><pre><span class="k">nvidia-smi</span></pre></div>
+  </div>
+  <div class="card" style="margin-top:18px"><h3>Términos que aparecen en la guía</h3><p><strong>Whisper</strong>: modelo que transcribe habla; aquí escucha cada frase para medir si salió bien y marcar el tiempo de cada palabra. <strong>LUFS</strong>: medida de volumen percibido; −14 es el estándar de YouTube. <strong>Hoja de contacto (stills)</strong>: una imagen con varios cuadros del video, para revisar todo de una vez. <strong>Look</strong>: el estilo visual del video — <em>reel</em> (predeterminado), <em>cinema</em> (imagen real a pantalla completa, franjas negras de cine) o <em>ledger</em> (aspecto de notas de versión); elige con <code>Video(job, look="cinema")</code>. <strong>flux2-klein</strong>: generador de imágenes que corre en local; el kit lo llama en <code>localhost:8000</code> (<code>FV_FLUX_URL</code>) solo si tienes ese servidor.</p><p>En la 1.ª ejecución Whisper large-v3 (~3 GB) y Chatterbox descargan los pesos de los modelos. Si Playwright se queja de una biblioteca del sistema: <code>sudo .venv/bin/python -m playwright install-deps chromium</code>.</p></div>
+</div></section>
+
+<section id="guia"><div class="wrap">
+  <span class="chip">Guía de uso · paso a paso</span>
+  <h2>Instala una vez, pide cuantos quieras</h2>
+  <p class="sub">Usa <code>TMPDIR=$(mktemp -d /tmp/fv.XXXX)</code> delante del render y de la captura: Chromium aborta si la ruta temporal es demasiado larga.</p>
+
+  <div class="step"><div class="b">1</div><div>
+    <h3>Clona e instala</h3>
+    <p>Crea el <code>.venv</code> del proyecto (Playwright + Pillow), verifica voz y Whisper y enlaza la skill en <code>~/.claude/skills/video-sem-rosto</code>.</p>
+<pre><span class="k">git clone</span> <span class="s">https://github.com/inematds/video-sem-rosto</span> ~/projetos/video-sem-rosto
+<span class="k">cd</span> ~/projetos/video-sem-rosto && <span class="k">bash setup.sh</span>   <span class="c"># tiene que terminar con SELFTEST PASS</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">2</div><div>
+    <h3>Ajusta el perfil</h3>
+    <p>El <code>PROFILE.md</code> guarda voz, llamada a la acción, visual y palabras prohibidas; la skill lo lee antes de cada video. Viene con el perfil de INEMA (llamada a inema.club, publicación con yt-pubx, avisos en el bot): cambia nombre, llamada, canal y reglas por los tuyos. Los pasos de publicación del <code>SKILL.md</code> que citan herramientas de INEMA son opcionales.</p>
+<pre><span class="k">nano</span> PROFILE.md   <span class="c"># tu nombre, tu voz, tu llamada (~3:00 y al final), tu canal</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">3</div><div>
+    <h3>Pide el video en Claude Code</h3>
+    <p>El agente investiga la fuente oficial, escribe <code>script.txt</code> y el guion con tiempos, y se detiene esperando tu aprobación. Después de tu "ok", él mismo ejecuta los pasos 4 a 7; los comandos de abajo sirven para ejecutarlos a mano o entender lo que ocurre.</p>
+<pre><span class="s">haz un video sin rostro sobre https://github.com/dono/projeto — unos 8 minutos, muéstrame el guion antes</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">4</div><div>
+    <h3>A mano: carpeta del video y voz con tiempo por palabra</h3>
+    <p>Para ejecutar sin el agente, empieza por el ejemplo de ~40 s (trae la marca INEMA en el texto de las escenas: cámbiala en el <code>job.py</code>). El <code>tts.py</code> lee <code>$P/script.txt</code> y genera <code>vo.mp3</code>, <code>words.json</code> y <code>vo_qc.json</code> (similitud de cada frase).</p>
+<pre>P=~/videos/teste; <span class="k">mkdir -p</span> $P/{img,cap}
+<span class="k">cp</span> templates/exemplo_30s.py $P/job.py && <span class="k">cp</span> templates/exemplo_30s.txt $P/script.txt
+<span class="k">python3</span> scripts/tts.py $P   <span class="c"># usa FV_VOICE; FV_LANG=pt</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">5</div><div>
+    <h3>Imágenes 3D y capturas (en paralelo)</h3>
+    <p><code>c_</code> = fondo claro, <code>d_</code> = oscuro; un objeto por imagen. La captura devuelve un <code>.json</code> con el recuadro de cada texto pedido.</p>
+<pre><span class="k">python3</span> scripts/images.py $P/img d_clap=<span class="s">"a film clapperboard beside an empty tripod"</span> d_monitor=<span class="s">"a widescreen monitor with a play button"</span>
+TMPDIR=$(mktemp -d /tmp/fv.XXXX) .venv/bin/python scripts/capture.py <span class="s">https://github.com/inematds/yt-pubx</span> $P/cap/gh.png <span class="s">"README"</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">6</div><div>
+    <h3>Escenas, verificación y render</h3>
+    <p>El <code>job.py</code> del ejemplo usa <code>img/d_clap.png</code>, <code>img/d_monitor.png</code> y <code>cap/gh.png</code> (generados en el paso 5). Los tiempos de las escenas son los de la voz del ejemplo: con tu voz, ajusta los <code>v.scene(inicio, fin, …)</code> leyendo el <code>words.json</code>. Video largo: <code>templates/job_full_template.py</code>. Primero la hoja de escenas, después el render.</p>
+<pre>TMPDIR=$(mktemp -d /tmp/fv.XXXX) .venv/bin/python $P/job.py stills   <span class="c"># out/stills.jpg</span>
+TMPDIR=$(mktemp -d /tmp/fv.XXXX) .venv/bin/python $P/job.py          <span class="c"># out/video-sem-rosto-teste.mp4</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">7</div><div>
+    <h3>QC</h3>
+    <p>Verifica tamaño, fps, bitrate, volumen y cuadros negros; sale con error si algo reprueba y graba una hoja de 16 cuadros.</p>
+<pre><span class="k">python3</span> scripts/qc.py $P/out/video-sem-rosto-teste.mp4</pre>
+  </div></div>
+</div></section>
+
+<section id="exemplos"><div class="wrap">
+  <span class="chip">Ejemplos</span>
+  <h2>La prueba de 40 s, hecha con el propio kit</h2>
+  <p class="sub">Voz local, tema INEMA, 1080p60, −14,3 LUFS. <a href="https://github.com/inematds/video-sem-rosto/releases/tag/v1.0.0" target="_blank" rel="noopener">Descarga el video en la release 1.0.0</a>.</p>
+  <div class="ex">
+    <figure><img src="../assets/ex1.jpg" alt="Hoja con 16 cuadros del video de prueba" loading="lazy"><figcaption>Hoja de contacto generada por el <code>qc.py</code>: papel ↔ negro, tarjeta amarilla, captura real, subtítulos karaoke.</figcaption></figure>
+    <figure><img src="../assets/ex2.jpg" alt="Cuadro del video de prueba con chips Título, Captura real, Imagen 3D y Subtítulo" loading="lazy"><figcaption>Escena "Cada frase, una escena": cada etiqueta entra en el tiempo de la palabra hablada.</figcaption></figure>
+  </div>
+</div></section>
+
+<section id="roadmap"><div class="wrap">
+  <span class="chip">Roadmap</span>
+  <h2>Lo que viene después</h2>
+  <p class="sub">El kit ya hace el video completo. Los próximos pasos son de integración con lo que INEMA ya usa.</p>
+  <div class="phase"><div class="tag">1.0 · hecho</div><div class="d"><strong>Kit funcionando</strong><span>Voz local verificada, tema INEMA, 3 looks, QC, ejemplo de 40 s, setup con autotest.</span></div></div>
+  <div class="phase"><div class="tag">próximo</div><div class="d"><strong>Miniaturas y descripción en un script</strong><span>Hoy el agente hace las miniaturas y la descripción con capítulos siguiendo el SKILL.md; el próximo paso es un script que lo haga solo.</span></div></div>
+  <div class="phase"><div class="tag">después</div><div class="d"><strong>EN/ES en un comando</strong><span>Traducir el <code>script.txt</code>, generar la voz en <code>FV_LANG=en|es</code> y reaprovechar las escenas.</span></div></div>
+</div></section>
+
+<footer>
+  <div class="wrap">
+    <div class="pill">Claude Code</div><div class="pill">Chatterbox + Whisper local</div><div class="pill">Playwright + ffmpeg</div>
+    <p style="margin-top:18px">video-sem-rosto · video sin cámara y sin avatar ·
+      <a href="https://github.com/inematds/video-sem-rosto">inematds/video-sem-rosto</a> ·
+      <a href="https://inema.club">INEMA.CLUB</a></p>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var KEY='video-sem-rosto-theme';
+    var b=document.body, t=document.getElementById('themeToggle');
+    if(localStorage.getItem(KEY)==='light'){ b.classList.add('light'); t.textContent='☀️'; }
+    t.addEventListener('click',function(){
+      var light=b.classList.toggle('light');
+      t.textContent=light?'☀️':'🌙';
+      localStorage.setItem(KEY, light?'light':'dark');
+    });
+  })();
+</script>
+</body>
+</html>

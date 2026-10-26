@@ -1,6 +1,6 @@
 ---
 name: video-sem-rosto
-description: Vídeo explicativo 16:9 SEM ROSTO (sem câmera, sem avatar) a partir de um link ou assunto — pesquisa a fonte oficial, roteiro aprovado pelo Nei, voz local do Nei (Chatterbox, sem API), cenas de motion design no tema INEMA (preto/papel/amarelo, Sora) com print real do site, render 3D e legenda karaokê, 1080p60, QC, thumbs e descrição com capítulos. 30 s a 15 min. Gatilho: "vídeo sem rosto", "faceless", "vídeo sem avatar sobre <link>", "/video-sem-rosto". Com avatar do Nei = explicavideos; reel/short 9:16 = makeshorts/r7ex.
+description: Vídeo explicativo 16:9 SEM ROSTO (sem câmera, sem avatar) a partir de um link ou assunto — pesquisa a fonte oficial, roteiro aprovado pelo dono do canal, voz local clonada (Chatterbox, sem API; no INEMA, a voz do Nei), cenas de motion design no tema INEMA (preto/papel/amarelo, Sora) com print real do site, render 3D e legenda karaokê, 1080p60, QC, thumbs e descrição com capítulos. 30 s a 15 min. Gatilho: "vídeo sem rosto", "faceless", "vídeo sem avatar sobre <link>", "/video-sem-rosto". Com avatar do Nei = explicavideos; reel/short 9:16 = makeshorts/r7ex.
 ---
 
 # Vídeo sem rosto (16:9, voz + motion design)
@@ -17,7 +17,7 @@ recursos → como instalar/rodar → o primeiro uso, passo a passo → chamada 2
    O que não dá para conferir não entra.
 2. **Roteiro** → `<job>/<Título> - roteiro.md` (cabeçalhos `### m:ss — Seção` pela contagem a 150 palavras/min) +
    `script.txt` (só a fala, linha em branco entre batidas — vai para a voz).
-   **PORTÃO: o Nei aprova o roteiro antes da voz e do render.** Mostrar com contagem de palavras, duração e onde caem as chamadas.
+   **PORTÃO: o dono do canal (no INEMA, o Nei) aprova o roteiro antes da voz e do render.** Mostrar com contagem de palavras, duração e onde caem as chamadas.
 3. **Voz** — `python3 scripts/tts.py <job>` → `vo.mp3` + `words.json` + `vo_qc.json`. Chatterbox local com `FV_VOICE=nei`;
    Whisper local mede cada frase e gera de novo a que sair < 0,80. Erro em frase = reescrever a frase (número por extenso,
    sigla soletrada) e rodar de novo. ~150 palavras/min.
@@ -39,7 +39,7 @@ recursos → como instalar/rodar → o primeiro uso, passo a passo → chamada 2
    folha de contato) — e OLHAR a folha.
 9. **Thumbs** — Codex image_gen com o gancho desenhado na arte (regra INEMA). Só logo oficial.
 10. **Entrega** — vídeo + roteiro + descrição com capítulos + lista dos fatos usados e do que não foi conferido.
-    Publicar pelo `yt-pubx` (`--dry-run` antes). Espanhol vai para `fila_es.py`. Avisar no bot com o link.
+    No INEMA (opcional fora dele): publicar pelo `yt-pubx` (`--dry-run` antes), espanhol pela `fila_es.py`, aviso no bot com o link.
 
 ## Imagem real (mostrar a coisa)
 - Se o tema tem teaser/demo oficial, MOSTRAR: `clip(src, at, x, y, w, start=<s>, credit="Oficial · @conta")`.
