@@ -1,0 +1,11 @@
+Vídeo sem rosto é um kit que transforma um assunto em vídeo explicativo, sem câmera e sem avatar.
+
+Você passa o link de uma ferramenta. O agente lê a fonte oficial e escreve o roteiro.
+
+Você aprova o roteiro. Só depois a voz é gerada, aqui mesmo na máquina.
+
+Cada frase vira uma cena: título, print real do site, imagem em 3D e legenda palavra por palavra.
+
+No fim sai um vídeo em 1080p, a 60 quadros, pronto para publicar.
+
+O kit está no GitHub, e o passo a passo está no inema.club, de graça.
